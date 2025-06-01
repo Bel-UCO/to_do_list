@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../model/task.dart';
-import '../repository/task_repository.dart';
+import '../model/task_repository.dart';
 
 class TaskViewModel extends ChangeNotifier {
   final TaskRepository _repository = TaskRepository();
@@ -28,6 +28,7 @@ class TaskViewModel extends ChangeNotifier {
     await _repository.saveTasks(_tasks);
     notifyListeners();
   }
+
   Future<void> deleteTask(String id) async {
     _tasks.removeWhere((task) => task.id == id);
     await _repository.saveTasks(_tasks);
@@ -35,12 +36,11 @@ class TaskViewModel extends ChangeNotifier {
   }
 
   void toggleTaskStatus(String id) {
-  final taskIndex = _tasks.indexWhere((task) => task.id == id);
-  if (taskIndex != -1) {
-    _tasks[taskIndex].isCompleted = !_tasks[taskIndex].isCompleted;
-    _repository.saveTasks(_tasks);
-    notifyListeners(); 
+    final taskIndex = _tasks.indexWhere((task) => task.id == id);
+    if (taskIndex != -1) {
+      _tasks[taskIndex].isCompleted = !_tasks[taskIndex].isCompleted;
+      _repository.saveTasks(_tasks);
+      notifyListeners();
+    }
   }
-}
-
 }

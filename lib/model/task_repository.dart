@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import '../model/task.dart';
+import 'task.dart';
 
 class TaskRepository {
   Future<String> get _localPath async {
