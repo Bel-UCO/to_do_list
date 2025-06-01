@@ -8,16 +8,16 @@ Model-View-ViewModel (MVVM) adalah arsitektur perangkat lunak yang memisahkan lo
 Komponen utama dalam MVVM:
 
 Model
-Model merepresentasikan data dan logika bisnis aplikasi. Ini biasanya berupa kelas-kelas data dan fungsi yang mengelola operasi data, seperti mengambil data dari database, API, atau penyimpanan lokal.
+Model merepresentasikan data dan logika bisnis aplikasi. Ini biasanya berupa kelas-kelas data dan fungsi yang mengelola operasi data, seperti mengambil data dari database, API, atau penyimpanan lokal. Dalam assignment saya, terdapat task dan task_repository.
 
 View
-View adalah antarmuka pengguna yang menampilkan data kepada pengguna dan menerima input. Dalam Flutter, ini adalah widget seperti Scaffold, ListView, TextField, dan lainnya. View tidak mengandung logika bisnis.
+View adalah antarmuka pengguna yang menampilkan data kepada pengguna dan menerima input. Dalam Flutter, ini adalah widget seperti Scaffold, ListView, TextField, dan lainnya. View tidak mengandung logika bisnis. Dalam view, terdapat add_task dan task_list.
 
 ViewModel
-ViewModel menjembatani antara Model dan View. Ia mengelola state aplikasi dan menyediakan data yang telah diproses ke View. ViewModel juga menangani input dari View dan meneruskan perintah ke Model. Dalam Flutter, ViewModel dapat diimplementasikan dengan ChangeNotifier dan dipadukan dengan Provider untuk state management.
+ViewModel menjembatani antara Model dan View. Ia mengelola state aplikasi dan menyediakan data yang telah diproses ke View. ViewModel juga menangani input dari View dan meneruskan perintah ke Model. Dalam Flutter, ViewModel dapat diimplementasikan dengan ChangeNotifier dan dipadukan dengan Provider untuk state management. Dalam viewModel terdapat task_view_model.
 
 # Instruction
-Memerlukan jdk versi 17 untuk dapat berjalan dengan baik. Selain itu dijalankan secara biasa dengan "flutter run" dan aplikasi siap digunakan.
+Memerlukan jdk versi 17 untuk dapat berjalan dengan baik. Selain itu dijalankan secara biasa dengan "flutter run" dan aplikasi siap digunakan. Aplikasi hanya bisa menambahkan dan menghapus task.
 
 # Refleksi
 
