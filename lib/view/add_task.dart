@@ -13,20 +13,31 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   final TextEditingController _controller = TextEditingController();
 
+  late TaskViewModel taskViewModel;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    taskViewModel = Provider.of<TaskViewModel>(context);
+  }
+
   void _saveTask() {
-  final title = _controller.text.trim();
-  if (title.isNotEmpty) {
+    final title = _controller.text.trim();
+
     final newTask = Task(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: title,
       isCompleted: false,
     );
 
-    Provider.of<TaskViewModel>(context, listen: false).addTask(newTask);
-    Navigator.pop(context);
+    taskViewModel.addTask(newTask).then((_) {
+      if (taskViewModel.errorMessage == null) {
+        Navigator.pop(context);
+      } else {
+        setState(() {}); // agar UI refresh untuk tampilkan error
+      }
+    });
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +51,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
           children: [
             TextField(
               controller: _controller,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Task title',
+                errorText: taskViewModel.errorMessage,
               ),
+              onChanged: (_) => taskViewModel.clearError(),
               onSubmitted: (_) => _saveTask(),
             ),
             const SizedBox(height: 20),

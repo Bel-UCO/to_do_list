@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import '../model/task.dart';
 import '../model/task_repository.dart';
+import '../utility/validator.dart';
 
 class TaskViewModel extends ChangeNotifier {
+  String? errorMessage;
   final TaskRepository _repository = TaskRepository();
   List<Task> _tasks = [];
 
@@ -17,7 +19,20 @@ class TaskViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void clearError() {
+    errorMessage = null;
+    notifyListeners();
+  }
+
   Future<void> addTask(Task task) async {
+    final error = Validator.validateTodoInput(task.title);
+    if (error != null) {
+      errorMessage = error;
+      notifyListeners();
+      return;
+    }
+
+    errorMessage = null;
     _tasks.add(task);
     await _repository.saveTasks(_tasks);
     notifyListeners();
